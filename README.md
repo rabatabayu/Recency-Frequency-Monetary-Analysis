@@ -1,95 +1,174 @@
-Automobile Sales | RFM Customer Segmentation
-End-to-end Customer Analytics Project using Python & Power BI
+# 🚗 Automobile Sales | RFM Customer Segmentation
 
-This project analyzes historical automobile sales transactions to understand customer value, purchasing behavior, and reactivation opportunities. It combines data cleaning, exploratory data analysis (EDA), Recency–Frequency–Monetary (RFM) segmentation, and an interactive Power BI dashboard to support customer-focused business decisions.
-Business Questions
-1. Customer Value: Which customer segment contributes the most revenue?
-2. Customer Behavior: How do Recency, Frequency, Monetary, and Average Order Value (AOV) differ across segments?
-3. Reactivation: Which previously valuable customers have not purchased recently and may be worth contacting again?
-Tools
-- Python: Pandas, NumPy, Matplotlib, Seaborn
-- Jupyter Notebook: Data cleaning, EDA, and feature engineering
-- Power BI: Data modeling, Power Query, DAX, and interactive visualization
-Dataset & Preparation
-Metric	Result
-Original dataset	2,747 rows, 20 columns
-Original unique orders	298
-Cleaned Shipped records	2,541
-Unique shipped orders	277
-Unique customers	89
-Revenue from shipped orders	9,019,093.90
-Analysis period	January 2018 – May 2020
+### 📊 End-to-End Customer Analytics Project | Python & Power BI
 
+## 📌 Project Overview
 
-Data preparation included validation of missing values, duplicates, date formats, and transaction consistency. Outliers were examined with boxplots and the Interquartile Range (IQR) and retained when plausible as genuine high-value purchases. The RFM analysis includes only orders with the Shipped status.
-Analytical Workflow
-1. Exploratory Data Analysis
-Univariate: Order Value, Customer Revenue, Purchase Frequency, and Recency distributions.
+This project analyzes automobile sales data to understand customer purchasing behavior, identify high-value customers, and uncover reactivation opportunities using **Recency, Frequency, and Monetary (RFM) Analysis**.
 
-Bivariate: Relationships among Frequency, Monetary, and Recency, including sensitivity checks for extreme customers.
+The project covers an end-to-end data analytics workflow, from data cleaning and exploratory data analysis (EDA) to RFM customer segmentation, interactive dashboard development, and strategic business recommendations.
 
-Multivariate: Spearman correlation heatmap and a customer-level Frequency vs AOV bubble chart.
+---
 
-Selected findings:
-Analysis	Finding
-Order Value distribution	Approximately symmetric (skewness 0.01)
-Customer Revenue distribution	Strong right skew (skewness 5.16)
-Purchase Frequency distribution	Strong right skew (skewness 5.94)
-Frequency vs Monetary	Spearman 0.64
-Recency vs Frequency	Spearman −0.67
-Frequency vs AOV	Spearman −0.01
+## 🎯 Business Objectives
 
+**Problem Statement**
 
-Frequency and AOV were nearly uncorrelated, suggesting different buying patterns across customers. Correlations involving total revenue are partly influenced by the identity Total Revenue = Frequency × AOV and should not be treated as causal evidence.
-2. RFM Scoring & Segmentation
-Each customer was assigned a 1–5 percentile-based score for each RFM component:
-- Recency (R): Days since the last shipped order; lower is better.
-- Frequency (F): Number of unique shipped orders; higher is better.
-- Monetary (M): Total historical revenue per customer; higher is better.
-The three scores were summed and grouped using rule-based thresholds:
-Segment	RFM Score	Customers	Customer Share	Revenue Share
-High Value	12–15	29	32.58%	53.21%
-Potential	9–11	24	26.97%	22.10%
-Needs Attention	3–8	36	40.45%	24.69%
+How can RFM-based customer segmentation help automobile businesses identify valuable customers, improve customer retention, and prioritize reactivation opportunities?
 
+**Key Business Questions**
 
-These thresholds are analytical assumptions, not statistically optimized segment boundaries.
-3. Customer Reactivation Analysis
-Customers with Recency ≥ 251 days (the upper quartile of Recency) were flagged as reactivation candidates.
-- 23 customers (25.84% of customers) met the criterion.
-- Their combined historical revenue was approximately 1.61M, equivalent to 17.89% of overall revenue.
-- Examples of priority candidates include Saveley & Henriot, Co., Vida Sport, Ltd., and Herkku Gifts.
-This identifies customers who may warrant follow-up; it does not estimate recoverable revenue or confirm churn.
-Power BI Dashboard
-The one-page interactive dashboard includes:
-- KPI cards: Total Revenue, Total Customers, Total Orders, Reactivation Candidates
+1. Which customer segments contribute the most to total revenue?
+2. How do purchasing behaviors differ across customer segments based on Recency, Frequency, and Monetary?
+3. Which customers should be prioritized for retention and reactivation strategies?
+
+---
+
+## 🛠️ Tools & Technologies
+
+| Tools | Purpose |
+|---|---|
+| 🐍 Python | Data Cleaning, EDA, Statistical Analysis |
+| 📚 Pandas & NumPy | Data Manipulation & Feature Engineering |
+| 📈 Matplotlib & Seaborn | Statistical Visualization |
+| 📊 Power BI | Interactive Dashboard |
+| 🔧 DAX & Power Query | Data Modeling & KPI Development |
+| 📓 Jupyter Notebook | Data Analysis & Documentation |
+
+---
+
+## 📂 Dataset Overview
+
+The dataset contains historical automobile sales transactions from **January 2018 to May 2020**.
+
+| Description | Value |
+|---|---:|
+| Original Records | 2,747 |
+| Original Features | 20 |
+| Unique Customers | 89 |
+| Unique Orders | 298 |
+| Cleaned Transactions | 2,541 |
+| Completed Shipped Orders | 277 |
+| Total Shipped Revenue | 9.02M |
+
+Only **Shipped** transactions were selected for the main customer analysis.
+
+---
+
+## 🔍 Analytical Workflow
+
+### 1️⃣ Data Cleaning & Preparation
+
+- Checked missing values, duplicates, and data types.
+- Converted transaction dates into datetime format.
+- Identified outliers using boxplots and the Interquartile Range (IQR) method.
+- Retained legitimate outliers to preserve high-value customer information.
+- Filtered shipped transactions and performed customer-level feature engineering.
+
+### 2️⃣ Exploratory Data Analysis (EDA)
+
+Performed univariate, bivariate, and multivariate analyses to identify customer purchasing patterns.
+
+**Key EDA Findings:**
+
+- Order Value distribution was approximately symmetric (skewness = 0.01).
+- Customer Revenue was strongly right-skewed (skewness = 5.16).
+- Purchase Frequency was strongly right-skewed (skewness = 5.94).
+- Frequency and Monetary showed a positive Spearman correlation (r = 0.64).
+- Recency and Frequency showed a negative Spearman correlation (r = -0.67).
+- Frequency and AOV were nearly uncorrelated (r = -0.01).
+
+These findings suggested that customers have different purchasing behaviors, supporting the need for customer segmentation.
+
+### 3️⃣ RFM Customer Segmentation
+
+Customers were scored from 1 to 5 based on:
+
+- **Recency (R):** Days since the last purchase.
+- **Frequency (F):** Number of unique transactions.
+- **Monetary (M):** Total historical customer revenue.
+
+Customers were then grouped into three segments using rule-based RFM scores.
+
+| Customer Segment | RFM Score | Customers | Customer Share |
+|---|---|---:|---:|
+| 🟢 High Value | 12–15 | 29 | 32.58% |
+| 🔵 Potential | 9–11 | 24 | 26.97% |
+| 🟠 Needs Attention | 3–8 | 36 | 40.45% |
+
+### 4️⃣ Power BI Dashboard
+
+Developed an interactive dashboard containing:
+
+- Revenue, Orders, Customers & Reactivation KPIs
 - Monthly Revenue Trend
 - Customer Distribution by Segment
-- Revenue Contribution and Customer Share vs Revenue Share
-- Segment Performance (average R, F, and M)
-- Frequency vs AOV bubble chart
-- Top Reactivation Candidates table
-- Slicers for Segment, Country, and Product Line
-Dashboard screenshot: Add an image of your final Power BI dashboard to the repository and link it here.
+- Revenue Contribution Analysis
+- Customer Share vs Revenue Share
+- Segment Performance Analysis
+- Frequency vs AOV Bubble Chart
+- Top Reactivation Candidates
 
-Key Business Insights
-1. High Value customers are the main revenue contributors. Although they account for only 32.58% of customers, they generate 53.21% of total historical revenue.
+**Interactive Filters:** Customer Segment, Country, and Product Line.
 
-2. Customer purchasing patterns differ. Higher purchase frequency does not necessarily imply a larger average order value (Spearman = −0.01), supporting differentiated retention and upselling approaches.
+---
 
-3. Reactivation opportunities exist beyond a single segment. The 23 candidates include both Potential and Needs Attention customers, so outreach should consider individual recency and historical value—not segment labels alone.
-Business Recommendations
-Segment	Suggested action
-High Value	Prioritize retention with personalized service and loyalty initiatives.
-Potential	Encourage repeat purchases, cross-selling, and higher basket values.
-Needs Attention	Test selective win-back campaigns, prioritizing customers with meaningful historical spending.
+## 💡 Key Business Insights
 
+### 🥇 1. High-Value Customers Drive Revenue
 
-Limitations
-- Findings describe a historical dataset ending in May 2020, not current customer activity.
-- RFM scores reflect the full historical dataset; dashboard category filters do not recalculate customer RFM scores.
-- A high Recency value indicates inactivity relative to the dataset's snapshot date, not confirmed churn.
-- Revenue is not profit, and historical Monetary is not predictive Customer Lifetime Value (CLV).
-- Recommendations are hypotheses to test, not proven intervention outcomes.
-Conclusion
-RFM analysis turns transaction-level sales data into actionable customer segments. The project identifies customers worth retaining, groups with potential for growth, and historical reactivation candidates—providing a practical framework for customer relationship strategies using Python and Power BI.
+**32.58% of customers generated 53.21% of total revenue.**
+
+The High Value segment contributes the largest revenue share, highlighting its importance for customer retention strategies.
+
+### 📈 2. Purchase Frequency Does Not Always Mean Higher AOV
+
+The Spearman correlation between Frequency and AOV was approximately **-0.01**, indicating almost no monotonic relationship.
+
+This suggests that customers with frequent purchases do not necessarily have higher average transaction values.
+
+### 🔄 3. Customer Reactivation Opportunities
+
+**23 customers (25.84%)** were identified as reactivation candidates using a historical Recency threshold.
+
+These customers contributed **17.89% of total historical revenue**, representing approximately 1.61M in previous sales.
+
+The findings highlight opportunities to prioritize customer reactivation based on historical value and inactivity.
+
+---
+
+## 🚀 Strategic Business Recommendations
+
+| Segment | Recommended Strategy |
+|---|---|
+| 🟢 High Value | Customer retention, loyalty programs, personalized services |
+| 🔵 Potential | Repeat purchase campaigns, upselling, cross-selling |
+| 🟠 Needs Attention | Selective reactivation, personalized win-back campaigns |
+
+The proposed strategies focus on improving customer engagement while prioritizing customer groups based on their historical purchasing behavior.
+
+---
+
+## 🏁 Project Outcome
+
+The analysis revealed that **customer revenue is unevenly distributed across segments**, with High Value customers generating more than half of total revenue.
+
+Different combinations of Recency, Frequency, and Monetary demonstrate the importance of applying differentiated customer management strategies.
+
+**By integrating Python-based analytics, RFM segmentation, and Power BI visualization, this project transforms historical transaction data into actionable insights for customer retention, development, and reactivation.**
+
+---
+
+## 📝 Analytical Notes
+
+- RFM segmentation uses predefined rule-based thresholds.
+- Recency is measured relative to the historical dataset, not the current date.
+- Reactivation candidates represent potential targets, not confirmed churned customers.
+- Historical customer revenue does not represent predicted Customer Lifetime Value (CLV).
+- Business recommendations are analytical proposals and have not been experimentally validated.
+
+---
+
+### ⭐ Project Focus
+
+**Customer Analytics | RFM Segmentation | Revenue Analysis | Customer Retention | Power BI Dashboard | Python EDA**
